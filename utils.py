@@ -21,9 +21,13 @@ import matplotlib.pyplot as plt
 from matplotlib.patches import Circle
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
-from openai import OpenAI
 
-CLIENT = OpenAI()
+OPEN_AI = False # True to use openai - false for AzureOpenAI services 
+if OPEN_AI:
+    from openai import OpenAI
+    CLIENT = OpenAI()
+else:    
+    from azure_openai_gpt4o import call_llm
 
 def draw_func_traj(rgb_array, trajectory, color='r', linewidth=4):
     height, width, _ = rgb_array.shape
@@ -881,15 +885,20 @@ class LMAgent:
         retries = 0
         while retries < max_retries:
             retries += 1
+            response = None
             try:
                 if "gpt" in self.vlm:
-                    response = CLIENT.chat.completions.create(
-                        model=self.vlm,
-                        messages=messages,
-                        max_tokens=4096,
-                        response_format={"type": "json_object"},
-                    )
-                    response = json.loads(response.choices[0].message.content)
+                    
+                    if OPEN_AI:
+                        response = CLIENT.chat.completions.create(
+                            model=self.vlm,
+                            messages=messages,
+                            max_tokens=4096,
+                            response_format={"type": "json_object"},
+                        )
+                        response = json.loads(response.choices[0].message.content)
+                    else:
+                        response = call_llm(messages, azure_deployment_model=self.vlm, max_tokens=4096)
                 break
             except Exception as e:
                 print(f"An error had occurred: {e}.\nNumber of attempts: {retries}")

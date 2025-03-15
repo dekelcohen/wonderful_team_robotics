@@ -17,19 +17,20 @@ def execute_code(code_str):
 def main(args):
     text_prompt = args.prompt
 
-    image = camera.get_rgb_image() # ADD YOUR CAMERA FUNCTION HERE
-    image = resize_rgb_array(image)
-    depth_array = camera.get_depth_image() # ADD YOUR CAMERA FUNCTION HERE
-
-    depth_array = np.flipud(depth_array)
-    image_number = 0
-    pil_image = draw_ticks('', '', '', '', depth_array)
-    save_pil(pil_image, dir=image_dir, file_name="Environment_Image_DEPTH")
-
-    # DRY RUN ALTERNATIVE:
-    # image = cv2.imread("assets/example.png")
-    # image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-    # image = resize_rgb_array(image)
+    if not args.image_path:        
+        image = camera.get_rgb_image() # ADD YOUR CAMERA FUNCTION HERE
+        image = resize_rgb_array(image)
+        depth_array = camera.get_depth_image() # ADD YOUR CAMERA FUNCTION HERE
+    
+        depth_array = np.flipud(depth_array)
+        image_number = 0
+        pil_image = draw_ticks('', '', '', '', depth_array)
+        save_pil(pil_image, dir=image_dir, file_name="Environment_Image_DEPTH")
+    else:
+        # DRY RUN ALTERNATIVE:
+        image = cv2.imread(args.image_path)
+        image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+        image = resize_rgb_array(image)
 
     rgb_array = np.flipud(image)
     image_number = 0
@@ -688,10 +689,23 @@ def main(args):
                 break
 
 
+
 if __name__ == "__main__":
-    args = get_input()
+    MANUAL_DEBUG = True        
+    if MANUAL_DEBUG:
+        class Dummy:
+            pass
+        args = Dummy()
+        args.prompt = 'Close the drawer'
+        args.image_path = r"D:\Docs\test6\Projects\Robotics\Samples\Open Drawer\Drawer_opened.png"
+        args.collect_log = True
+        args.task = 'close_drawer'
+        args.run_number = 0
+        args.vlm = 'gpt-4o-sim'
+    else:
+        args = get_input()
     if args.collect_log:
-        image_dir = f'{args.task}_{args.run_number}'
+        image_dir = f'logs/{args.task}_{args.run_number}'
     else:
         image_dir = "log"
     text_log = f'{image_dir}/response_log.txt'

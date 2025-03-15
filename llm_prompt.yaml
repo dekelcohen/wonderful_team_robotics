@@ -69,7 +69,7 @@ supervisor:
     5. **Provide a Brief Context for your Output:**
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "high_level_plan": "<Insert the High-Level Plan List Here>",
@@ -116,7 +116,7 @@ supervisor:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "updated_reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "revised_high_level_plan": "<Insert the High-Level Plan List Here>",
@@ -152,7 +152,7 @@ supervisor:
       - Address any important considerations for ensuring accuracy, such as maintaining symmetry, orientation, or adherence to geometric constraints.
       - Ensure that your description is thorough enough for someone to understand and implement the function correctly.
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "request_function": <boolean value of True if needed, else False>,
@@ -183,7 +183,7 @@ supervisor:
       - Assume you have access to common Python packages, but do not include any print statements.
       - When generating trajectories, do NOT generate a very long trajectory. The geometric path should be simple and contain no more than 20 points.
     
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "generated_function": "<Insert the string containing the entire function, including proper indentation and comments>"
@@ -217,7 +217,7 @@ supervisor:
       - Store the output of the function call to the given output variable name in your output Python script.
       - Make sure that the input parameters are accurate and fully address the task requirements. If needed, refer to the function description for any specific input format or constraints.
     
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "run_function": "<Insert the Python script as a string with proper indentation, function call, and specified output variable.>"
@@ -243,7 +243,7 @@ supervisor:
       - If the visualization shows correct geometric shape, specify in the output that the execution results are correct; otherwise request for a new function.
       - 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "correct_results": True if no errors in script and visualization, otherwise False
@@ -302,7 +302,7 @@ supervisor:
     **Your output action sequence MUST follow the specified requirements strictly**
 
     
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "action_sequence": [
@@ -361,7 +361,7 @@ supervisor:
     **Your output action sequence MUST follow the specified requirements strictly**
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "updated_action_sequence": [
@@ -440,7 +440,7 @@ memory_agent:
     - When not making any changes, output "none" for both descriptive key and information summary.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "descriptive_key": "<Insert Descriptive Key for Information Summary Here>",
@@ -516,7 +516,7 @@ verification_agent:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "clarifying_questions": "<Insert the Clarifying Questions Here>",
@@ -576,7 +576,7 @@ verification_agent:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "subgoal_in_question": "<Insert the Subgoal In Question Here>",
@@ -626,7 +626,7 @@ verification_agent:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "target_list": "<Insert the Updated List of Target Locations and Target Objects Here>",
@@ -672,7 +672,7 @@ verification_agent:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "target_list": "<Insert the Updated List of Target Locations and Target Objects Here>",
@@ -725,7 +725,7 @@ verification_agent:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "verified_action_sequence": "<Insert the verified action sequence here>"
@@ -777,7 +777,7 @@ grounding_manager:
     You only have limited number of chances to produce this center, so you need to generate an accurate center point.
 
 
-    **Output in JSON Format:**
+    **Output in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
     {{
       "reasoning_process": "<Explain your thought process in details here. Include all of the required components and their values in your output and how they are derived, then extract these values to the rest of this output json response>",
       "initial_center": {{
@@ -816,7 +816,7 @@ grounding_manager:
       - Output the index (0, 1, or 2 only) of the best action points. If all points are suboptimal, you must pick the better one from the given options.
       - Your output must contain a valid index corresponding one input image.
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -853,7 +853,7 @@ grounding_manager:
       - Respond with the bounding box information. Again, you should make the bounding box large enough so the entire object would fit inside it.
 
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -898,7 +898,7 @@ grounding_manager:
     - You MUST only respond with either "True" or "False" value for each of the A, B, C, D section in the output. True means there are traces of the target object in a margin piece; False means there are no traces of it. Do not output anything else for these sections: no numeric values, no explanations needed. 
     - Finally, if you identified any traces of the target object in any of the pieces, respond with "True" for target_appearance section; otherwise respond with "False" for that section.
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
     {{
       "reasoning_process": "<Explain your thought process in details here. Briefly talk about how would you adjust the bounding box.",
@@ -954,7 +954,7 @@ grounding_manager:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -1003,7 +1003,7 @@ grounding_manager:
     4. **Provide a Brief Context for your Output:**
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -1049,7 +1049,7 @@ grounding_manager:
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -1099,7 +1099,7 @@ grounding_manager:
     4. **Provide a Brief Context for your Output:**
       - Provide a brief summary of your current output's context, including your current task, the purpose of your output, and any interactions with other agents. This context should not exceed four sentences.
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -1177,7 +1177,7 @@ box_checker:
       - "Reject"
 
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
@@ -1247,7 +1247,7 @@ box_mover:
     - You MUST only respond with either "True" or "False" value for each of the A, B, C, D section in the output. True means there are traces of the target object in a margin piece; False means there are no traces of it. Do not output anything else for these sections: no numeric values, no explanations needed. 
 
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
     {{
       "reasoning_process": "<Explain your thought process in details here. Briefly talk about how would you adjust the bounding box.",
@@ -1302,7 +1302,7 @@ box_mover:
       - Select the position revision amount from one of these options: ['tiny', 'small', 'medium', 'large', 'none'].
 
 
-    **Output Example in JSON Format:**
+    **Output Example in JSON Format:** Provide the output strictly as valid JSON. Do not include any markdown formatting or code block markers in your response.
 
 
     {{
