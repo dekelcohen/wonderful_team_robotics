@@ -624,8 +624,10 @@ def main(args):
         # get height
         height_info = []
         for target in action_list:
-            height = camera.get_height(target["actionable_point"][0], target["actionable_point"][1]) # ADD YOUR CAMERA FUNCTION HERE
-            height_info.append({"target": target["target"], "height": height})
+            if args.height_info_avail:
+                camera.get_height(target["actionable_point"][0], target["actionable_point"][1]) # ADD YOUR CAMERA FUNCTION HERE                
+                height_info.append({"target": target["target"], "height": height})
+                
 
         write_to_log(text_log, "Height Information", height_info)
 
@@ -642,12 +644,13 @@ def main(args):
         write_to_log(text_log, "Verify Action Sequence", response)
         action_sequence = response["verified_action_sequence"]
 
-        update_height_values_prompt = supervisor_update_height_values.format(**{"action_sequence": action_sequence, "text_prompt": text_prompt, "height_info": height_info})
-        supervisor.receive_communication(update_height_values_prompt, image_list=[base64_top])
-        response = supervisor.process_task()
-        write_to_log(text_log, "Supervisor Update Height Values in Action Sequence", response)
-        action_sequence = response["updated_action_sequence"]
-        
+        if args.height_info_avail:
+            update_height_values_prompt = supervisor_update_height_values.format(**{"action_sequence": action_sequence, "text_prompt": text_prompt, "height_info": height_info})
+            supervisor.receive_communication(update_height_values_prompt, image_list=[base64_top])
+            response = supervisor.process_task()
+            write_to_log(text_log, "Supervisor Update Height Values in Action Sequence", response)
+            action_sequence = response["updated_action_sequence"]
+            
 
         time_record["convert_actions_to_sequence"] = round(time.time() - start)
 
@@ -702,6 +705,7 @@ if __name__ == "__main__":
         args.task = 'close_drawer'
         args.run_number = 0
         args.vlm = 'gpt-4o-sim'
+        args.height_info_avail = False
     else:
         args = get_input()
     if args.collect_log:

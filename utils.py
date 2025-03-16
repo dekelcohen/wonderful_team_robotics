@@ -87,6 +87,7 @@ def get_input():
     parser.add_argument('--vlm', type=str, required=True, help="Visual language model name.")
     parser.add_argument('--collect_log', action='store_true', help="Whether to collect log.")
     parser.add_argument('--prompt', type=str, required=True, help="Task description.")
+    parser.add_argument('--height_info_avail', type=bool, default=True, required=False, help="Do depth camera provides height")
     # Parse the arguments
     args = parser.parse_args()
     
