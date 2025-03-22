@@ -704,7 +704,7 @@ if __name__ == "__main__":
         args.collect_log = True
         args.task = 'close_drawer'
         args.run_number = 0
-        args.vlm = 'gpt-4o-sim'
+        args.vlm = 'gpt-4o-sim' # 'claude-3-7-sonnet-20250219' # 
         args.height_info_avail = False
     else:
         args = get_input()

@@ -800,6 +800,35 @@ def create_messages(prompt, persona, conversation_history="", image_list=[]):
                 })
     return messages
 
+def create_claude_messages(prompt, persona, conversation_history="", image_list=[]):
+    """
+    Creates messages in Claude API format, which handles images differently.
+    """
+    # For Claude, we need to format messages differently
+    claude_messages = [
+        # First user message with system context and prompt
+        {
+            "role": "user",
+            "content": [
+                {"type": "text", "text": f"Assistant Persona\n\n{persona}\n\nConversation History\n\n{conversation_history}\n\n{prompt}"}
+            ]
+        }
+    ]
+    
+    # Add images to the user message
+    if len(image_list):
+        for base64_image in image_list:
+            claude_messages[0]['content'].append({
+                "type": "image",
+                "source": {
+                    "type": "base64",
+                    "media_type": "image/png",
+                    "data": base64_image  # Claude expects raw base64 without the data:image prefix
+                }
+            })
+    
+    return claude_messages    
+
 def format_dict(d, indent=4):
     formatted_str = ''
     for key, value in d.items():
@@ -889,7 +918,6 @@ class LMAgent:
             response = None
             try:
                 if "gpt" in self.vlm:
-                    
                     if OPEN_AI:
                         response = CLIENT.chat.completions.create(
                             model=self.vlm,
@@ -900,6 +928,25 @@ class LMAgent:
                         response = json.loads(response.choices[0].message.content)
                     else:
                         response = call_llm(messages, azure_deployment_model=self.vlm, max_tokens=4096)
+                elif "claude" in self.vlm:
+                    # Import Anthropic client if not already imported
+                    from anthropic import Anthropic
+                    
+                    # Initialize Anthropic client (ensure ANTHROPIC_API_KEY is in your environment variables) - rely on dotenv from azure_openai_gpt4o.py
+                    anthropic_client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
+                    
+                     # Create Claude format messages
+                    claude_messages = create_claude_messages(prompt, self.persona, conversation_history, image_list)
+    
+                    # Call Claude API
+                    anthropic_response = anthropic_client.messages.create(
+                        model=self.vlm,  # e.g., "claude-3-7-sonnet-20250219"
+                        messages=claude_messages,
+                        max_tokens=4096                        
+                    )
+                    
+                    # Parse response
+                    response = json.loads(anthropic_response.content[0].text)
                 break
             except Exception as e:
                 print(f"An error had occurred: {e}.\nNumber of attempts: {retries}")

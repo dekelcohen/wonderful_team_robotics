@@ -6,3 +6,4 @@ openai
 PyYaml
 dotenv
 requests
+anthropic
